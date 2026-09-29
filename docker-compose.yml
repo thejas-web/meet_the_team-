@@ -1,0 +1,53 @@
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: postgres_db_dev
+    restart: always
+    env_file:
+      - .env.local
+    volumes:
+      - postgres_data_dev:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build: ./backend
+    container_name: django_backend_dev
+    restart: always
+    command: python manage.py runserver 0.0.0.0:8000
+    env_file:
+      - .env.local
+    volumes:
+      - ./backend:/app
+      - static_volume_dev:/app/staticfiles
+      - media_volume_dev:/app/mediafiles
+    ports:
+      - "8000:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+
+  frontend:
+    build: ./frontend
+    container_name: react_frontend_dev
+    restart: always
+    command: npm run dev -- --host 0.0.0.0
+    env_file:
+      - .env.local
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    ports:
+      - "5173:5173"
+    depends_on:
+      - backend
+
+volumes:
+  postgres_data_dev:
+  static_volume_dev:
+  media_volume_dev:

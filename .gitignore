@@ -1,0 +1,115 @@
+# =========================
+# Environment files
+# =========================
+
+.env
+.env.*
+!.env.example
+
+
+# =========================
+# Python
+# =========================
+
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+venv/
+env/
+.venv/
+ENV/
+
+# Django
+*.log
+local_settings.py
+
+# Django static/media generated files
+backend/staticfiles/
+backend/mediafiles/
+
+# SQLite (if ever used locally)
+*.sqlite3
+db.sqlite3
+
+
+# =========================
+# Django migrations
+# =========================
+
+# Don't ignore migrations by default.
+# Keep migration files in Git.
+
+
+# =========================
+# Python tooling
+# =========================
+
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+
+# =========================
+# Node / React / Vite
+# =========================
+
+node_modules/
+frontend/node_modules/
+
+# Vite build output
+frontend/dist/
+
+# Vite cache
+frontend/.vite/
+
+# npm logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+
+# =========================
+# IDE / Editors
+# =========================
+
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+
+.idea/
+
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+
+# =========================
+# Docker
+# =========================
+
+*.pid
+
+
+# =========================
+# Build / temporary files
+# =========================
+
+*.tmp
+*.temp
+*.bak
+
+
+# =========================
+# Coverage / test reports
+# =========================
+
+coverage/
+.pytest_cache/
